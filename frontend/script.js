@@ -6,3 +6,13 @@ function getView() {
     elements[i].style.width = "50%";
   }
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+  const columns = document.querySelectorAll(".column");
+
+  columns.forEach(column => {
+      column.addEventListener("click", function() {
+          this.classList.toggle("expanded");
+      });
+  });
+});

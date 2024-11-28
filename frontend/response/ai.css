@@ -8,6 +8,11 @@ div {
     font-family: 'Source Sans Pro', sans-serif;
 }
 
+.top {
+    color: rgb(0, 0, 0);
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -39,4 +44,8 @@ div {
     width: 100% !important;
     height: 100% !important;
     overflow: auto;
+}
+
+.center {
+    text-align: center;
 }

@@ -12,11 +12,11 @@ ___
 * Vamsi Yadagiri
   * AI Model Developer
   * Grade: 9
-  * First Coding Experience: Using scikit-learn, a Python AI library, to predict how long he would have to wait on average for 
+  * First Coding Experience: Playing Minecraft Code Hour.
 * Suchay Kommisetty
   * Database Manager
   * Grade: 11
-  * First Coding Experience: 
+  * First Coding Experience: Using Java to do his Pre-Algebra homework.
 
 ___
 

@@ -1,0 +1,11 @@
+Actively using:
+Nitrogen
+Phosphorus
+Potassium
+Temperature
+Humidity
+Rainfall
+PH
+
+Unused:
+https://www.getambee.com/api/soil (Paid)

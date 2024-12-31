@@ -14,3 +14,10 @@ button:hover {
     color: rgb(84,124,69);
     border: black 2px solid;
 }
+body {
+    background-color: rgb(79, 117, 46);
+}
+h1, p {
+    text-align: center;
+    font-family: 'Source Sans Pro', sans-serif;
+}

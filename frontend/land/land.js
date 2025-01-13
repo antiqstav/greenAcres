@@ -12,33 +12,37 @@ map.on('click', function(e) {
     var popup = L.popup();
     var coordinates = latlng.lat + ", " + latlng.lng;
     document.getElementById('coordinates').value = coordinates;
+    var lat = latlng.lat;
+    var lon = latlng.lng;
+    if (lat > 180 ) {
+        lat -= 180;
+        while (lat >= 180) {
+            lat -= 180;
+        }
+    }
+    else if (lat < -180) {
+        lat += 180;
+        while (lat <= -180) {
+            lat += 180;
+        }
+    }
+    if (lon > 180) {
+        lon -= 180;
+        while (lon >= 180) {
+            lon -= 180;
+        }
+    }
+    else if (lon < -180) {
+        lon += 180;
+        while (lon <= -180) {
+            lon += 180;
+        }
+    }
     popup
         .setLatLng(e.latlng)
-        .setContent("You clicked the map at " + e.latlng.toString().substring(7, e.latlng.toString().length - 1))
+        .setContent("You clicked the map at " + lat + ", " + lon)
         .openOn(map);
-    localStorage.setItem("latitude", latlng.lat);
-    localStorage.setItem("longitude", latlng.lng);
+
+    localStorage.setItem("latitude", lat);
+    localStorage.setItem("longitude", lon);
 });
-
-function getAPI() {
-    const lat = Number(localStorage.getItem("latitude"));
-    const lon = Number(localStorage.getItem("longitude"));
-
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&temperature_unit=fahrenheit`;
-
-    fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Network response was not ok");
-            }
-            return response.json();
-        })
-        .then(data => {
-            const weather = data.current_weather;
-            const temp = weather.temperature;
-            const coords = document.getElementById("coords");
-            coords.textContent = `Temperature in Fahrenheit for Latitude: ${lat}, Longitude: ${lon} is ${temp}°F`;
-            return temp;
-        })
-    return -1;
-}

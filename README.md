@@ -1,4 +1,4 @@
-# agriLife
+# Green Acres
 
 The comprehensive solution for farmers to maximize their crop yield and profit.
 

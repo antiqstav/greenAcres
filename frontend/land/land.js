@@ -1,3 +1,7 @@
+document.addEventListener("DOMContentLoaded", function () {
+    localStorage.clear();
+});
+
 // Initialize the map
 var map = L.map('map').setView([38.7946, 263.14453], 5);
 
@@ -8,13 +12,10 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 
 // Add a click event listener to the map
 map.on('click', function(e) {
-    var latlng = e.latlng;
     var popup = L.popup();
-    var coordinates = latlng.lat + ", " + latlng.lng;
-    document.getElementById('coordinates').value = coordinates;
-    var lat = latlng.lat;
-    var lon = latlng.lng;
-    if (lat > 180 ) {
+    var lat = e.latlng.lat;
+    var lon = e.latlng.lng;
+    if (lat > 180) {
         lat -= 180;
         while (lat >= 180) {
             lat -= 180;
@@ -42,7 +43,6 @@ map.on('click', function(e) {
         .setLatLng(e.latlng)
         .setContent("You clicked the map at " + lat + ", " + lon)
         .openOn(map);
-
     localStorage.setItem("latitude", lat);
     localStorage.setItem("longitude", lon);
 });

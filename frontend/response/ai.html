@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgriLife</title>
+    <title>Green Acres</title>
     <link rel="stylesheet" href="ai.css">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap" rel="stylesheet">
     <script src="ai.js"></script>
@@ -14,8 +14,16 @@
         <div class="column" style="background-color:rgb(14, 47, 21);">
             <h2>Weather</h2>
             <p>Locate the weather phenomena in your area that could affect your crops.</p>
-            <p id="weather"></p>
-            <p id="url"></p>
+            <div class="hidden-text" style="display: none;">
+                <h1>The temperature statistics for your area:</h1>
+                <ul>
+                    <li id="temp"></li>
+                    <li id="humid"></li>
+                    <li id="rain"></li>
+                </ul>
+                <br><br><hr><br>
+                <h2>Some information about how these factors can affect crop yield</h2>
+            </div>
         </div>
         <div class="column" style="background-color:rgb(23,72,22);">
             <h2>Soil Quality</h2>
@@ -33,7 +41,16 @@
             <div class="hidden-text" style="display: none;">
                 <h1 id="crop1"></h1>
                 <ul>
-                    <li id="how">Coriander</li>
+                    <li id="desc">Coriander</li>
+                </ul>
+                <ul>
+                    <li id="how"></li>
+                    <li id="how2"></li>
+                </ul>
+                <ul>
+                    <li id="prac"></li>
+                    <li id="prac2"></li>
+                    <li id="prac3"></li>
                 </ul>
                 <p id="crop2"></p>
                 <p id="crop3"></p>

@@ -12,17 +12,20 @@
 <body>
     <div>
         <h1>Green Acres</h1>
-        <p>Click on your location on the map to get its coordinates.</p>
+        <p>Click on your location on the map to get its coordinates, or input your latitude and longitude below.</p>
     </div>
-    <div>
-        <div id = "map" style = "width: 900px; height: 580px"></div>
+    <div id="map-container">
+        <div id="map" style="width: 800px; height: 500px"></div>
         <script src="land.js"></script>
     </div>
-    <div>
-        <input type="text" id="coordinates" placeholder="Coordinates will appear here">
+    <br><br>
+    <div id="coord">
+        <input type="text" id="coords" placeholder="...or enter your coordinates in x,y...">
+        <button class="button" id="saveCoords">Save coordinates</button>
     </div>
+    <br>
     <a href="../response/ai.html">
-        <button class="button">Send coordinates</button>
+        <button class="button">Send coordinates!</button>
     </a>
 </body>
 </html>

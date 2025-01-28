@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
+
     makeAIRequest();
 });
 
@@ -24,7 +25,6 @@ document.addEventListener("DOMContentLoaded", function () {
 function makeAIRequest() {
     getWeather();
     const weatherArr = [Number(localStorage.getItem("temp")), Number(localStorage.getItem("humidity")), Number(localStorage.getItem("rainfall"))];
-    document.getElementById('weather').innerText = "The temperature in the area is " + weatherArr[0] + "°C, the humidity is " + weatherArr[1] + "%, and the rainfall is " + weatherArr[2] + "mm.";
     const params = new URLSearchParams({
         nitrogen: 90,
         phosphorus: 42,
@@ -34,7 +34,9 @@ function makeAIRequest() {
         ph: 6.5,
         rainfall: weatherArr[2]
     })
-    fetch(`http://127.0.0.1:5000/predict?${params.toString()}`, {
+    var url = `http://127.0.0.1:5000/predict?${params.toString()}`;
+    console.log("AI requested at: " + url);
+    fetch(url, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -56,10 +58,20 @@ function makeAIRequest() {
                     if (str.charAt(x) === ' ') { str = str.replace(' ', ''); }
                 }
                 str = str + ".txt";
+                str = "apple.txt";
                 fetch("../../backend/cropTexts/" + str)
                     .then((res) => res.text())
                     .then((text) => {
-                        document.getElementById('how').innerText = text;
+                        arr = text.split("\n");
+                        // arr[1] is the description of the crop
+                        // arr[5 - 6] is how to plant them
+                        // and arr[9 - 11] is how to care for them
+                        document.getElementById('desc').innerText = arr[1];
+                        document.getElementById('how').innerText = arr[5];
+                        document.getElementById('how2').innerText = arr[6];
+                        document.getElementById('prac').innerText = arr[9];
+                        document.getElementById('prac2').innerText = arr[10];
+                        document.getElementById('prac3').innerText = arr[11];
                     })
                     .catch((e) => console.error(e));
             }
@@ -75,6 +87,7 @@ function getWeather() {
     const lat = Number(localStorage.getItem("latitude"));
     const lon = Number(localStorage.getItem("longitude"));
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,relative_humidity_2m,rain`;
+    console.log("Weather requested at: " + url);
     var temp = 0;
     var humidity = 0;
     var rainfall = 0;
@@ -100,5 +113,8 @@ function getWeather() {
             localStorage.setItem("temp", temp.toFixed(2));
             localStorage.setItem("humidity", humidity.toFixed(2));
             localStorage.setItem("rainfall", rainfall.toFixed(2));
+            document.getElementById('temp').innerText = "Temperature in Celsius: " + temp.toFixed(2);
+            document.getElementById('humid').innerText = "Humidity in percent: " + humidity.toFixed(2);
+            document.getElementById('rain').innerText = "Rainfall in millimeters: " + rainfall.toFixed(2);
         });
 }

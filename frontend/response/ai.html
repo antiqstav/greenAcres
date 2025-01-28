@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AgriLife</title>
-    <link rel="stylesheet" href="../ai.css">
+    <link rel="stylesheet" href="ai.css">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap" rel="stylesheet">
-    <script src="../ai.js"></script>
+    <script src="ai.js"></script>
 </head>
 
 <body>
@@ -15,6 +15,7 @@
             <h2>Weather</h2>
             <p>Locate the weather phenomena in your area that could affect your crops.</p>
             <p id="weather"></p>
+            <p id="url"></p>
         </div>
         <div class="column" style="background-color:rgb(23,72,22);">
             <h2>Soil Quality</h2>
@@ -29,7 +30,14 @@
         <div class="column" style="background-color:rgb(84,124,69);">
             <h2>Get AI-enhanced Response</h2>
             <p>With the power of machine learning, see what crops will be the most profitable.</p>
-            <p id="stats"></p>
+            <div class="hidden-text" style="display: none;">
+                <h1 id="crop1"></h1>
+                <ul>
+                    <li id="how">Coriander</li>
+                </ul>
+                <p id="crop2"></p>
+                <p id="crop3"></p>
+            </div>
         </div>
     </div>
 </body>

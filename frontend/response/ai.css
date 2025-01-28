@@ -49,3 +49,7 @@ div {
 .center {
     text-align: center;
 }
+
+.hidden-text {
+    display: none;
+}

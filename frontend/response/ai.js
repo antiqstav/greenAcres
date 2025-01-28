@@ -1,9 +1,9 @@
-const allCrops = ['Moth Beans', 'Mung Bean', 'Lentil', 
-    'Rice', 'Jute', 'Banana', 'Pomegranate', 
-    'Blackgram', 'Grapes', 'Orange', 'Papaya', 
-    'Mango', 'Coffee', 'Chick Pea', 'Cotton', 
-    'Maize', 'Apple', 'Coconut', 'Kidney Beans', 
-    'Muskmelon', 'Watermelon', 'Pigeon Peas'];
+const allCrops = ['Moth Beans', 'Mung Beans', 'Lentils', 
+    'Rices', 'Jutes', 'Bananas', 'Pomegranates', 
+    'Blackgrams', 'Grapes', 'Oranges', 'Papayas', 
+    'Mangos', 'Coffees', 'Chickpeas', 'Cotton', 
+    'Maize', 'Apples', 'Coconuts', 'Kidney Beans', 
+    'Muskmelons', 'Watermelons', 'Pigeon Peas'];
 
 document.addEventListener("DOMContentLoaded", function () {
     const columns = document.querySelectorAll(".column");
@@ -11,11 +11,16 @@ document.addEventListener("DOMContentLoaded", function () {
     columns.forEach(column => {
         column.addEventListener("click", function () {
             this.classList.toggle("expanded");
+            const hiddenText = this.querySelector('.hidden-text');
+            if (hiddenText) {
+                hiddenText.style.display = this.classList.contains('expanded') ? 'block' : 'none';
+            }
         });
     });
     makeAIRequest();
 });
 
+// main function!
 function makeAIRequest() {
     getWeather();
     const weatherArr = [Number(localStorage.getItem("temp")), Number(localStorage.getItem("humidity")), Number(localStorage.getItem("rainfall"))];
@@ -40,8 +45,27 @@ function makeAIRequest() {
             var highest = 0;
             var ind = -1;
             const predictions = data.keras_prediction;
-            predictions.sort((a, b) => a - b);
-            document.getElementById('stats').innerText = allCrops[0] + " " + allCrops[1] + " " + allCrops[2];
+            predictions.sort((b, a) => b - a);
+            if (allCrops[0] !== undefined) {
+                document.getElementById('crop1').innerText = "The best crop in your location is " + allCrops[21] + "!";
+                document.getElementById('crop2').innerText = "Another crop that will thrive in your area are " + allCrops[20] + ".";
+                document.getElementById('crop3').innerText = "Another crop that will thrive in your area are " + allCrops[19] + ".";
+                var str = allCrops[21];
+                str = str.toLowerCase();
+                for (var x = 0; x < str.length; x++) {
+                    if (str.charAt(x) === ' ') { str = str.replace(' ', ''); }
+                }
+                str = str + ".txt";
+                fetch("../../backend/cropTexts/" + str)
+                    .then((res) => res.text())
+                    .then((text) => {
+                        document.getElementById('how').innerText = text;
+                    })
+                    .catch((e) => console.error(e));
+            }
+            else {
+                document.getElementById('crop1').innerText = "There seems to be an issue with the prediction model. Please try again later, or access the landing page again.";
+            }
         })
         .catch(error => console.error('Error:', error));
 }
@@ -73,8 +97,8 @@ function getWeather() {
             temp = temp / tempArr.length;
             humidity = humidity / humidityArr.length;
             rainfall = rainfall / rainfallArr.length;
-            localStorage.setItem("temp", temp);
-            localStorage.setItem("humidity", humidity);
-            localStorage.setItem("rainfall", rainfall);
+            localStorage.setItem("temp", temp.toFixed(2));
+            localStorage.setItem("humidity", humidity.toFixed(2));
+            localStorage.setItem("rainfall", rainfall.toFixed(2));
         });
 }

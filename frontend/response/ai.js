@@ -31,7 +31,7 @@ function makeAIRequest() {
         potassium: 43,
         temperature: weatherArr[0],
         humidity: weatherArr[1],
-        ph: 6.5,
+        ph: 6.75,
         rainfall: weatherArr[2]
     })
     var url = `http://127.0.0.1:5000/predict?${params.toString()}`;
@@ -48,6 +48,7 @@ function makeAIRequest() {
             var ind = -1;
             const predictions = data.keras_prediction;
             predictions.sort((b, a) => b - a);
+            console.log(predictions);
             if (allCrops[0] !== undefined) {
                 document.getElementById('crop1').innerText = "The best crop in your location is " + allCrops[21] + "!";
                 document.getElementById('crop2').innerText = "Another crop that will thrive in your area are " + allCrops[20] + ".";
@@ -58,7 +59,6 @@ function makeAIRequest() {
                     if (str.charAt(x) === ' ') { str = str.replace(' ', ''); }
                 }
                 str = str + ".txt";
-                str = "apple.txt";
                 fetch("../../backend/cropTexts/" + str)
                     .then((res) => res.text())
                     .then((text) => {

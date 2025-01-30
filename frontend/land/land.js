@@ -1,21 +1,35 @@
 document.addEventListener("DOMContentLoaded", function () {
     localStorage.clear();
-    const inputField = document.getElementById('coords');
-    const submitBtn = document.getElementById('saveCoords');
-
-    submitBtn.addEventListener('click', function () {
-        const inputValue = inputField.value;
-        let text = inputValue;
-        let pattern = /,/;
-        if (pattern.test(text)) {
-            let coords = text.split(',');
-            let lat = localStorage.setItem("latitude", coords[0]);
-            let lon = localStorage.setItem("longitude", coords[1]);
+    const input = document.getElementById('coords');
+    const submit = document.getElementById('saveCoords');
+    const save = document.getElementById('saved');
+    save.style.display = 'none';
+    
+    submit.addEventListener('click', function () {
+        const inp = input.value;
+        const regex = /^\s*-?\d+(\.\d+)?\s*,\s*-?\d+(\.\d+)?\s*$/;
+        save.style.display = 'block';
+        setTimeout(() => {
+            save.style.display = 'none';
+        }, 3000);
+        if (regex.test(inp)) {
+            console.log('Valid coordinates:', inp);
+            save.innerText = "Saved!";
+            localStorage.setItem("latitude", Number(inp.split(',')[0].trim()));
+            localStorage.setItem("longitude", Number(inp.split(',')[1].trim()));
+        } else {
+            save.innerText = "Incorrect format inputted!";
+            console.error('User-entered information doesn\'t follow the format x,y');
         }
+        input.value = '';
     });
 });
 
 var map = L.map('map').setView([38.7946, 263.14453], 4);
+
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
 
 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -53,10 +67,6 @@ map.on('click', function(e) {
         .setLatLng(e.latlng)
         .setContent("You clicked the map at " + lat + ", " + lon)
         .openOn(map);
-    localStorage.setItem("latitude", lat.toFixed(2));
-    localStorage.setItem("longitude", lon.toFixed(2));
+    localStorage.setItem("latitude", lat);
+    localStorage.setItem("longitude", lon);
 });
-
-function saveCoordsFromTextbox() {
-
-}

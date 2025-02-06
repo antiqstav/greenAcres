@@ -6,10 +6,7 @@ import tensorflow as tf
 app = Flask(__name__)
 CORS(app)
 
-# Load the Keras model
 keras_model = tf.keras.models.load_model('my_model.keras')
-
-# Load the TFLite model
 tflite_interpreter = tf.lite.Interpreter("optimized_model.tflite")
 tflite_interpreter.allocate_tensors()
 tflite_input_details = tflite_interpreter.get_input_details()
@@ -22,7 +19,6 @@ def home():
 @app.route('/predict', methods=['GET'])
 def predict():
     try:
-        # Extract data from the query parameters
         nitrogen = float(request.args.get('nitrogen'))
         phosphorus = float(request.args.get('phosphorus'))
         potassium = float(request.args.get('potassium'))
@@ -32,11 +28,9 @@ def predict():
         rainfall = float(request.args.get('rainfall'))
         
         input_features = np.array([[nitrogen, phosphorus, potassium, temperature, humidity, ph, rainfall]])
-        
-        # Keras model prediction
+    
         keras_prediction = keras_model.predict(input_features)
 
-        # TFLite model prediction
         tflite_interpreter.set_tensor(tflite_input_details[0]['index'], np.array(input_features, dtype=np.float32))
         tflite_interpreter.invoke()
         tflite_prediction = tflite_interpreter.get_tensor(tflite_output_details[0]['index'])

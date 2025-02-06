@@ -11,16 +11,17 @@
 </head>
 <body>
     <div>
-        <h1>Green Acres</h1>
+        <!-- 1920 × 1080 -->
+        <img id="logo" src="../../backend/logo.png" alt="Green Acres!" width="220" height="123.75">
         <p>Click on your location on the map to get its coordinates, or input your latitude and longitude below.</p>
     </div>
     <div id="map-container">
-        <div id="map" style="width: 800px; height: 500px"></div>
+        <div id="map" style="width: 750px; height: 450px"></div>
         <script src="land.js"></script>
     </div>
     <br><br>
     <div id="coord">
-        <input type="text" id="coords" placeholder="...or enter your coordinates in x,y...">
+        <input type="text" id="coords" placeholder="Enter your coordinates in x,y...">
         <button class="button" id="saveCoords">Save coordinates</button>
         <p id="saved" class="hidden-text"></p>
     </div>

@@ -4,6 +4,7 @@ const allCrops = ['Moth Beans', 'Mung Beans', 'Lentils',
     'Mangos', 'Coffees', 'Chickpeas', 'Cotton', 
     'Maize', 'Apples', 'Coconuts', 'Kidney Beans', 
     'Muskmelons', 'Watermelons', 'Pigeon Peas'];
+const url = "ED7E18E0-48F5-31DD-A419-1997BA464EFE";
 
 document.addEventListener("DOMContentLoaded", function () {
     const columns = document.querySelectorAll(".column");
@@ -117,4 +118,8 @@ function getWeather() {
             document.getElementById('humid').innerText = "Humidity in percent: " + humidity.toFixed(2);
             document.getElementById('rain').innerText = "Rainfall in millimeters: " + rainfall.toFixed(2);
         });
+}
+
+function getSoil() {
+    
 }

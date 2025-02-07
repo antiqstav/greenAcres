@@ -4,21 +4,21 @@ const allCrops = ['Moth Beans', 'Mung Beans', 'Lentils',
     'Mangos', 'Coffees', 'Chickpeas', 'Cotton', 
     'Maize', 'Apples', 'Coconuts', 'Kidney Beans', 
     'Muskmelons', 'Watermelons', 'Pigeon Peas'];
-const url = "ED7E18E0-48F5-31DD-A419-1997BA464EFE";
 
 document.addEventListener("DOMContentLoaded", function () {
     const columns = document.querySelectorAll(".column");
 
     columns.forEach(column => {
         column.addEventListener("click", function () {
-            this.classList.toggle("expanded");
+            if (column.getAttribute("id") === "ai") {
+                this.classList.toggle("expanded");
+            }
             const hiddenText = this.querySelector('.hidden-text');
             if (hiddenText) {
                 hiddenText.style.display = this.classList.contains('expanded') ? 'block' : 'none';
             }
         });
     });
-
     makeAIRequest();
 });
 
@@ -67,6 +67,7 @@ function makeAIRequest() {
                         // arr[1] is the description of the crop
                         // arr[5 - 6] is how to plant them
                         // and arr[9 - 11] is how to care for them
+                        console.log(arr);
                         document.getElementById('desc').innerText = arr[1];
                         document.getElementById('how').innerText = arr[5];
                         document.getElementById('how2').innerText = arr[6];
@@ -103,20 +104,14 @@ function getWeather() {
             const tempArr = data.hourly.temperature_2m;
             const humidityArr = data.hourly.relative_humidity_2m;
             const rainfallArr = data.hourly.rain;
-            for (let x = 0; x < tempArr.length; x++) {
-                temp += tempArr[x];
-                humidity += humidityArr[x];
-                rainfall += rainfallArr[x];
-            }
-            temp = temp / tempArr.length;
-            humidity = humidity / humidityArr.length;
-            rainfall = rainfall / rainfallArr.length;
-            localStorage.setItem("temp", temp.toFixed(2));
-            localStorage.setItem("humidity", humidity.toFixed(2));
-            localStorage.setItem("rainfall", rainfall.toFixed(2));
-            document.getElementById('temp').innerText = "Temperature in Celsius: " + temp.toFixed(2);
-            document.getElementById('humid').innerText = "Humidity in percent: " + humidity.toFixed(2);
-            document.getElementById('rain').innerText = "Rainfall in millimeters: " + rainfall.toFixed(2);
+            const d = new Date();
+            let hour = d.getHours();
+            localStorage.setItem("temp", tempArr[hour].toFixed(2));
+            localStorage.setItem("humidity", humidityArr[hour].toFixed(2));
+            localStorage.setItem("rainfall", rainfallArr[hour].toFixed(2));
+            document.getElementById('temp').innerText = "Temperature in Celsius: " + tempArr[hour].toFixed(2);
+            document.getElementById('humid').innerText = "Humidity in percent: " + humidityArr[hour].toFixed(2);
+            document.getElementById('rain').innerText = "Rainfall in millimeters: " + rainfallArr[hour].toFixed(2);
         });
 }
 

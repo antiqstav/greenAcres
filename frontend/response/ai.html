@@ -14,15 +14,13 @@
         <div class="column" style="background-color:rgb(14, 47, 21);">
             <h2>Weather</h2>
             <p>Locate the weather phenomena in your area that could affect your crops.</p>
-            <div class="hidden-text" style="display: none;">
+            <div>
                 <h1>The temperature statistics for your area:</h1>
                 <ul>
                     <li id="temp"></li>
                     <li id="humid"></li>
                     <li id="rain"></li>
                 </ul>
-                <br><br><hr><br>
-                <h2>Some information about how these factors can affect crop yield</h2>
             </div>
         </div>
         <div class="column" style="background-color:rgb(23,72,22);">
@@ -34,14 +32,20 @@
         <div class="column" style="background-color:rgb(79, 117, 46);">
             <h2>USDA Pricings</h2>
             <p>Find out the current market prices of crops in your area.</p>
+                <h1>The current market prices for your area:</h1>
+                <ul>
+                    <li>Corn: $4.48 per bushel</li>
+                    <li>Soybean: $10.66 per bushel</li>
+                    <li>Cotton: $0.66 per lb</li>
+                </ul>
         </div>
-        <div class="column" style="background-color:rgb(84,124,69);">
+        <div class="column" id="ai" style="background-color:rgb(84,124,69);">
             <h2>Get AI-enhanced Response</h2>
             <p>With the power of machine learning, see what crops will be the most profitable.</p>
             <div class="hidden-text" style="display: none;">
                 <h1 id="crop1"></h1>
                 <ul>
-                    <li id="desc">Coriander</li>
+                    <li id="desc"></li>
                 </ul>
                 <ul>
                     <li id="how"></li>

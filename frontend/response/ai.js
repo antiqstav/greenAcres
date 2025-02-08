@@ -47,18 +47,25 @@ function makeAIRequest() {
         .then(data => {
             var highest = 0;
             var ind = -1;
-            const predictions = data.keras_prediction;
-            predictions.sort((b, a) => b - a);
+            var predictions = data.keras_prediction;
+            for (var x = 0; x < predictions.length; x++) {
+                if (predictions[x] > highest) {
+                    highest = predictions[x];
+                    ind = x;
+                }
+            }
             if (predictions[0] !== undefined) {
-                document.getElementById('crop1').innerText = "The best crop in your location is " + allCrops[21] + "!";
-                document.getElementById('crop2').innerText = "Another crop that will thrive in your area are " + allCrops[20] + ".";
-                document.getElementById('crop3').innerText = "Another crop that will thrive in your area are " + allCrops[19] + ".";
-                var str = allCrops[21];
+                document.getElementById('crop1').innerText = "The best crop in your location is " + allCrops[ind] + "!";
+                document.getElementById('crop2').innerText = "Another crop that will thrive in your area are " + allCrops[ind + 2] + ".";
+                document.getElementById('crop3').innerText = "Another crop that will thrive in your area are " + allCrops[ind + 4] + ".";
+                var str = allCrops[ind];
                 str = str.toLowerCase();
                 for (var x = 0; x < str.length; x++) {
                     if (str.charAt(x) === ' ') { str = str.replace(' ', ''); }
                 }
+                str = str.toLowerCase();
                 str = str + ".txt";
+                console.log("Crop text requested using: " + str);
                 fetch("../../backend/cropTexts/" + str)
                     .then((res) => res.text())
                     .then((text) => {

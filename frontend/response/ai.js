@@ -49,8 +49,7 @@ function makeAIRequest() {
             var ind = -1;
             const predictions = data.keras_prediction;
             predictions.sort((b, a) => b - a);
-            console.log(predictions);
-            if (allCrops[0] !== undefined) {
+            if (predictions[0] !== undefined) {
                 document.getElementById('crop1').innerText = "The best crop in your location is " + allCrops[21] + "!";
                 document.getElementById('crop2').innerText = "Another crop that will thrive in your area are " + allCrops[20] + ".";
                 document.getElementById('crop3').innerText = "Another crop that will thrive in your area are " + allCrops[19] + ".";

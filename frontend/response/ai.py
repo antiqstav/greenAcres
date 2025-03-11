@@ -12,6 +12,7 @@ tflite_interpreter.allocate_tensors()
 tflite_input_details = tflite_interpreter.get_input_details()
 tflite_output_details = tflite_interpreter.get_output_details()
 
+# AI Predictions
 @app.route('/')
 def home():
     return render_template('ai.html')

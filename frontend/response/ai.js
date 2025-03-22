@@ -87,7 +87,7 @@ function makeAIRequest() {
                 document.getElementById('crop1').innerText = "There seems to be an issue with the prediction model. Please try again later, or access the landing page again.";
             }
         })
-        .catch(error => console.error('Error:', error));
+        .catch(document.getElementById('crop1').innerText = "There seems to be an issue with the prediction model. Please try again later, or access the landing page again.");
 }
 
 // All API callings

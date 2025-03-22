@@ -4,8 +4,6 @@ import { getFirestore } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-
 import {
   doc,
   getDoc,
-  collection,
-  addDoc,
   setDoc
 } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js";
 const firebaseConfig = {
@@ -39,8 +37,8 @@ document.getElementById("login").addEventListener("submit", async (e) => {
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists()) {
-    // do something here to go to the next page
     alert("Welcome, " + username);
+    window.location.replace("console.html");
   }
   else {
     alert("Invalid username or password");
@@ -62,8 +60,6 @@ document.getElementById("register").addEventListener("submit", async (e) => {
   }
   const docname = username + "-" + password;
 
-  console.log(docname);
-
   const docRef = doc(db, "crops", docname);
   const docSnap = await getDoc(docRef);
 
@@ -71,9 +67,11 @@ document.getElementById("register").addEventListener("submit", async (e) => {
     alert("User already exists with username " + username + ". Please try another username.");
   }
   else {
-    await setDoc(doc(db, "crops", docname), {
-      this: "worked!"
-    });
+    console.log("Registered user " + username + ". Check Firebase for password details.")
+    const docRef = doc(db, "crops", "sampleInput");
+    const docSnap = await getDoc(docRef);
+    const sample = docSnap.data();
+    await setDoc(doc(db, "crops", docname), sample);
     alert("User registered successfully. Please login to continue.");
   }
 

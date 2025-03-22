@@ -14,7 +14,7 @@ ___
   * Grade: 9
   * First Coding Experience: Playing Minecraft Code Hour.
 * Suchay Kommisetty
-  * Database and API Manager
+  * Database Manager
   * Grade: 11
   * First Coding Experience: Using Java and some Python magic to do his Pre-Algebra homework.
 

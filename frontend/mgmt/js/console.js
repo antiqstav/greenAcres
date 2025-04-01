@@ -103,6 +103,7 @@ document.getElementById("submit").addEventListener("click", async (e) => {
 // logout button logic
 document.getElementById("logout").addEventListener("click", (e) => {
   e.preventDefault();
+  alert("Logged out successfully.");
   localStorage.removeItem("docname");
   window.location.replace("auth.html");
 });

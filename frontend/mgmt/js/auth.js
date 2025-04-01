@@ -46,7 +46,7 @@ document.getElementById("login").addEventListener("submit", async (e) => {
   const q = await getDocs(collection(db, docname));
 
   if (!q.empty) {
-    alert("Welcome, " + username);
+    alert("Welcome, " + username + "!");
     window.location.replace("console.html");
     localStorage.setItem("docname", docname);
   }

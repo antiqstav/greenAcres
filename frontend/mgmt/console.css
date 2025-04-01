@@ -1,5 +1,5 @@
 * {
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: "Lato", sans-serif;
   background-color: #0c3501;
   color: white;
 }
@@ -8,7 +8,6 @@ h1 {
   font-size: 50px;
   color: white;
   text-align: center;
-  font-family: "Source Sans Pro", sans-serif;
 }
 .sidenav {
   height: 100%;
@@ -33,18 +32,12 @@ h1 {
 a {
   font-size: 35px;
   color: white;
-  font-family: "Source Sans Pro", sans-serif;
 }
 
 img {
   padding-left: 10%;
   padding-bottom: 10%;
   background-color: #4f752e;
-}
-
-* {
-  box-sizing: border-box;
-  font-family: "Source Sans Pro", sans-serif;
 }
 
 .column {

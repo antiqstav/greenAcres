@@ -4,7 +4,9 @@ import { getFirestore } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-
 import {
   doc,
   getDoc,
-  setDoc
+  getDocs,
+  setDoc,
+  collection
 } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js";
 const firebaseConfig = {
   apiKey: "AIzaSyBdtXeJeeT0ooE8yHsbMpUDVeXuDwkGAKk",
@@ -24,25 +26,33 @@ const db = getFirestore(app);
 const login = document.getElementById("login");
 const register = document.getElementById("register");
 
+// handling saved login
+document.addEventListener("DOMContentLoaded", () => {
+  const savedLogin = localStorage.getItem("docname");
+  if (savedLogin !== null) {
+    window.location.replace("console.html");
+    return;
+  }
+});
+
 // login logic
 document.getElementById("login").addEventListener("submit", async (e) => {
+
   e.preventDefault();
   const username = login.username.value;
   const password = login.password.value;
   const docname = username + "-" + password;
 
-  console.log(docname);
+  const q = await getDocs(collection(db, docname));
 
-  const docRef = doc(db, "crops", docname);
-  const docSnap = await getDoc(docRef);
-
-  if (docSnap.exists()) {
+  if (!q.empty) {
     alert("Welcome, " + username);
     window.location.replace("console.html");
+    localStorage.setItem("docname", docname);
   }
   else {
     alert("Invalid username or password");
-    console.log("No such user with username (" + username + ")")
+    console.log("No such user with username (" + username + ")");
   }
 
   login.reset();
@@ -55,24 +65,25 @@ document.getElementById("register").addEventListener("submit", async (e) => {
   const password = register.password.value;
   if (password.length < 8) {
     alert("Password should be at least 8 characters long.");
-    // maybe add reference for password requirements?
     return;
   }
+
   const docname = username + "-" + password;
 
-  const docRef = doc(db, "crops", docname);
-  const docSnap = await getDoc(docRef);
+  const q = await getDocs(collection(db, docname));
 
-  if (docSnap.exists()) {
-    alert("User already exists with username " + username + ". Please try another username.");
-  }
-  else {
-    console.log("Registered user " + username + ". Check Firebase for password details.")
+  if (q.empty) {
     const docRef = doc(db, "crops", "sampleInput");
     const docSnap = await getDoc(docRef);
-    const sample = docSnap.data();
-    await setDoc(doc(db, "crops", docname), sample);
-    alert("User registered successfully. Please login to continue.");
+    await setDoc(doc(db, docname, "start"), docSnap.data());
+    alert("Account created successfully. Please login to continue");
+    window.location.replace("console.html");
+    localStorage.setItem("docname", docname);
+    console.log("Registered new user with username (" + username + ") and password (" + password + ")");
+  }
+  else {
+    alert("Username already exists. Please choose another.");
+    console.log("Attempted register with username (" + username + ").");
   }
 
   register.reset();

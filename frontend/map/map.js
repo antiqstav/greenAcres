@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    localStorage.clear();
+    // localStorage.clear();
     const input = document.getElementById('coords');
     const submit = document.getElementById('saveCoords');
     const save = document.getElementById('saved');

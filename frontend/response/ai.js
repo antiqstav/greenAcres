@@ -7,6 +7,7 @@ const allCrops = ['Moth Beans', 'Mung Beans', 'Lentils',
 
 document.addEventListener("DOMContentLoaded", function () {
     const columns = document.querySelectorAll(".column");
+    const submitButton = document.getElementById("submit");
 
     columns.forEach(column => {
         column.addEventListener("click", function () {
@@ -56,6 +57,7 @@ function makeAIRequest() {
             }
             if (predictions[0] !== undefined) {
                 document.getElementById('crop1').innerText = "The best crop in your location is " + allCrops[ind] + "!";
+                localStorage.setItem("cropName", allCrops[ind]);
                 document.getElementById('crop2').innerText = "Another crop that will thrive in your area are " + allCrops[ind + 2] + ".";
                 document.getElementById('crop3').innerText = "Another crop that will thrive in your area are " + allCrops[ind + 4] + ".";
                 var str = allCrops[ind];
@@ -87,7 +89,7 @@ function makeAIRequest() {
                 document.getElementById('crop1').innerText = "There seems to be an issue with the prediction model. Please try again later, or access the landing page again.";
             }
         })
-        .catch(document.getElementById('crop1').innerText = "There seems to be an issue with the prediction model. Please try again later, or access the landing page again.");
+        .catch(error => console.error('Error:', error));
 }
 
 // All API callings
@@ -119,8 +121,4 @@ function getWeather() {
             document.getElementById('humid').innerText = "Humidity in percent: " + humidityArr[hour].toFixed(2);
             document.getElementById('rain').innerText = "Rainfall in millimeters: " + rainfallArr[hour].toFixed(2);
         });
-}
-
-function getSoil() {
-    
 }

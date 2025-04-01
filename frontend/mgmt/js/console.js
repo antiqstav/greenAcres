@@ -139,12 +139,10 @@ async function populateTable() {
       const cropName = cropData.cropName || "Unknown Crop"; // Use the "cropName" field or a default value
       const acresPlanted = cropData.acresPlanted || "N/A"; // Use the "acresPlanted" field or a default value
       const rainfall = cropData.rainfall || "N/A"; // Use the "rainfall" field or a default value
-
-      const details = cropData.details;
+      
       document.getElementById("pCrop").innerHTML = "Crop name: " + cropName;
-      document.getElementById("pAcres").innerHTML = "Acres planted: ";
-      document.getElementById("pRain").innerHTML = "Current rainfall in area: " + cropName;
-      document.getElementById("pDesc").innerHTML = "Description of crop: " + cropName;
+      document.getElementById("pAcres").innerHTML = "Acres planted: " + acresPlanted;
+      document.getElementById("pRain").innerHTML = "Current rainfall in area: " + rainfall;
 
       // Create a new div for each crop
       const cropBox = document.createElement("div");
@@ -152,8 +150,6 @@ async function populateTable() {
       cropBox.setAttribute("id", doc.id);
       cropBox.innerHTML = `
         <h3 id="cropBox">${cropName}</h3>
-        <p><strong>Acres Planted:</strong> ${acresPlanted}</p>
-        <p><strong>Rainfall:</strong> ${rainfall}</p>
         <p><strong>Location:</strong> ${cropData.lat}, ${cropData.lon}</p>
         <button id="updateCrop">Update</button>
         <button id="deleteCrop">Delete</button>
@@ -179,8 +175,8 @@ async function populateTable() {
         }
         e.preventDefault();
         cropDetails.classList.add("visible");
+        localStorage.setItem("cropID", cropBox.id);
         overlay.classList.add("visible");
-        console.log("Opened crop " + cropBox.id + " details.");
       });
       cropBox.querySelector("#updateCrop").addEventListener("click", (e) => {
         e.preventDefault();
@@ -203,6 +199,7 @@ async function populateTable() {
       e.preventDefault();
       cropDetails.classList.remove("visible");
       overlay.classList.remove("visible");
+      localStorage.removeItem("cropID");
     });
   } catch (error) {
     console.error("Error fetching crops:", error);

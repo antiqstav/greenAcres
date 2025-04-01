@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="../console.css">
     <link rel="icon" type="image/x-icon" href="../../backend/favicon.ico">
     <script type="module" src="../js/console.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="sidenav">
@@ -52,14 +55,16 @@
 
     <div id="cropDetails">
         <button id="closeDetails"><span>&times;</span></button>
-        <h2>Crop Details</h2>
+        <h1>Crop Details</h2>
         <div id="details">
             <p id="pCrop">Crop Name: </p>
             <p id="pAcres">Acres planted: </p>
             <p id="pRain">Rainfall in the area of the crop: </p>
-            <p id="pDesc">Crop Description: </p>
+            <div id="map-container">
+                <div id="map" style="width: 90%; height: 250px; text-align: center;"></div>
+                <script type="module" src="../js/console.js"></script>
+            </div>
         </div>
-        <img id="cropImage" src="" alt="Crop Image">
     </div>
     <div id="overlay"></div>
 

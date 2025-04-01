@@ -5,12 +5,12 @@ html, body {
 
 div {
     color: rgb(255, 255, 255);
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Lato';
 }
 
 .top {
     color: rgb(0, 0, 0);
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Lato'
 }
 
 * {

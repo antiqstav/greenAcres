@@ -12,13 +12,17 @@ document.addEventListener("DOMContentLoaded", function () {
     columns.forEach(column => {
         column.addEventListener("click", function () {
             if (column.getAttribute("id") === "ai") {
-                this.classList.toggle("expanded");
+                this.classList.add("expanded");
             }
             const hiddenText = this.querySelector('.hidden-text');
             if (hiddenText) {
                 hiddenText.style.display = this.classList.contains('expanded') ? 'block' : 'none';
             }
         });
+    });
+
+    document.getElementById("save").addEventListener("click", function () {
+        localStorage.setItem("saveFromResponse", true);
     });
     makeAIRequest();
 });

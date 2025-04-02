@@ -135,10 +135,10 @@ async function populateTable() {
       if (doc.id === "start") {
         return;
       }
-      const cropData = doc.data(); // Get the document data
-      const cropName = cropData.cropName || "Unknown Crop"; // Use the "cropName" field or a default value
-      const acresPlanted = cropData.acresPlanted || "N/A"; // Use the "acresPlanted" field or a default value
-      const rainfall = cropData.rainfall || "N/A"; // Use the "rainfall" field or a default value
+      const cropData = doc.data();
+      const cropName = cropData.cropName || "Unknown Crop";
+      const acresPlanted = cropData.acresPlanted || "N/A";
+      const rainfall = cropData.rainfall || "N/A";
       
       document.getElementById("pCrop").innerHTML = "Crop name: " + cropName;
       document.getElementById("pAcres").innerHTML = "Acres planted: " + acresPlanted;
@@ -206,3 +206,20 @@ async function populateTable() {
     cropsDiv.innerHTML = "<p>Error loading crops. Please try again later.</p>";
   }
 }
+
+document.addEventListener("DOMContentLoaded", async function () {
+  if (localStorage.getItem("saveFromResponse") === "true") {
+    localStorage.removeItem("saveFromResponse");
+    const cropName = localStorage.getItem("cropName");
+    const rainfall = localStorage.getItem("rainfall");
+    localStorage.removeItem("cropName", cropName);
+    localStorage.removeItem("rainfall", rainfall);
+
+    const newCropForm = document.getElementById("newCropForm");
+    const overlay = document.getElementById("overlay");
+    newCropForm.classList.add("visible");
+    overlay.classList.add("visible");
+
+    console.log(newCropForm);
+  }
+});

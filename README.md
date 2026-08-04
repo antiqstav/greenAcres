@@ -2,10 +2,6 @@
 
 The comprehensive solution for farmers to maximize their crop yield and profit.
 
-## The theme statement and our solution
-According to the TSA "Themes and Problems" page, this year's problem statement is as follows:
-> Develop a program that enhances the environment and/or agriculture to be more sustainable and efficient.
-
 Because of the ubiquity and usefulness of AI in everyday applications, we decided to develop a one-stop solution for the beginning farmer.
 The app boasts an intuitive UI for farmers who aren't tech-savvy. The features of the application include:
 * Crop management
